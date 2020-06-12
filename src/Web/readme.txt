@@ -12,6 +12,13 @@ Infrastructure types
 * Data access implementation types (Repositories)
 * Infrastructure-specific services (for example, FileLogger or SmtpNotifier)
 
+Add-migration InitialIdentityModel -context AppIdentityDbContext -OutputDir "Identity/Migrations"
+Update-Database -context AppIdentityDbContext
+
+Add-migration Initial -context ShopContext -OutputDir "Data/Migrations"
+Update-Database -context ShopContext
+
+
 UI layer types
 * Controllers
 * Filters

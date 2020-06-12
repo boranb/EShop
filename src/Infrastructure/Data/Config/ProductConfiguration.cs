@@ -22,7 +22,7 @@ namespace Infrastructure.Data.Config
 
             builder.Property(x => x.UnitPrice)
                 .IsRequired()
-                .HasColumnName("decimal(18,2)");
+                .HasColumnType("decimal(18, 2)");
 
             builder.Property(x => x.PhotoPath)
                 .IsRequired(false);
