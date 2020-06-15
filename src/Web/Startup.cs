@@ -14,6 +14,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Web.Interfaces;
+using Web.Services;
+using Web.ViewModels;
 
 namespace Web
 {
@@ -43,6 +46,7 @@ namespace Web
                 .AddDefaultTokenProviders();
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
+            services.AddScoped<IHomeIndexViewModelService, HomeIndexViewModelService>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
