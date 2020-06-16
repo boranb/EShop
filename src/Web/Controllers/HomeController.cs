@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using Web.Interfaces;
 using Web.Models;
 
@@ -21,9 +18,9 @@ namespace Web.Controllers
             _homeIndexViewModelService = homeIndexViewModelService;
         }
 
-        public async Task<IActionResult> Index(int? categoryId, int? brandId)
+        public async Task<IActionResult> Index(int? pageId, int? categoryId, int? brandId)
         {
-            return View(await _homeIndexViewModelService.GetHomeIndexViewModel(categoryId,brandId));
+            return View(await _homeIndexViewModelService.GetHomeIndexViewModel(pageId ?? 1,Constants.ITEMS_PER_PAGE, categoryId,brandId));
         }
 
         public IActionResult Privacy()

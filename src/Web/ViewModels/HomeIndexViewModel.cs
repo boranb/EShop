@@ -1,10 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ApplicationCore.Entities;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Web.Interfaces;
 
 namespace Web.ViewModels
 {
@@ -15,5 +10,6 @@ namespace Web.ViewModels
         public List<SelectListItem> Brands { get; set; }
         public int? CategoryId { get; set; }
         public int? BrandId { get; set; }
+        public PaginationInfoViewModel PaginationInfo { get; set; }
     }
 }
