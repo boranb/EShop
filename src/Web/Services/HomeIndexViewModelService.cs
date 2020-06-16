@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationCore.Specifications;
 using Web.Interfaces;
 using Web.ViewModels;
 
@@ -55,8 +56,7 @@ namespace Web.Services
             {
                 Categories = await GetCategories(),
                 Brands = await GetBrands(),
-                Products = await _productRepository.ListAsync(x =>
-                    (!categoryId.HasValue || x.CategoryId == categoryId) && (!brandId.HasValue || x.BrandId == brandId)),
+                Products = await _productRepository.ListAsync(new ProductsFilterSpecification(categoryId,brandId)),
                 CategoryId = categoryId,
                 BrandId = brandId
             };

@@ -33,6 +33,7 @@ Install-Package Microsoft.EntityFrameworkCore.Tools
 Install-Package Microsoft.EntityFrameworkCore.SqlServer
 Install-Package Microsoft.AspNetCore.Identity
 Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+install-package Ardalis.Specification
 
 
 ## SEED DATA ##
