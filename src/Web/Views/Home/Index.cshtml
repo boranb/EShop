@@ -24,18 +24,22 @@
 
 
 @*https://blackrockdigital.github.io/startbootstrap-shop-homepage/*@
-<div class="row">
+@if (Model.Products.Count > 0)
+{
+    <div class="row">
 
-    @foreach (var product in Model.Products)
-    {
-        <partial name="_ProductPartial" model="product" />  
-    }
-</div>
+        @foreach (var product in Model.Products)
+        {
+            <partial name="_ProductPartial" model="product" />
+        }
+    </div>
 
+    <partial name="_PaginationPartial" model="Model.PaginationInfo" />
 
-<div>
-    Toplam Sayfa Adedi: @Model.PaginationInfo.TotalPages<br />
-    Şu Anki Sayfa @Model.PaginationInfo.TotalItems<br />
-    Toplam Öğe Adedi: @Model.PaginationInfo.ActualPage<br />
-    Bu Sayfadaki Öğe Adedi: @Model.PaginationInfo.ItemsOnPage<br />
-</div>
+}
+else
+{
+    <div class="text-center p-5">
+        No Products were found matching your selection.
+    </div>
+}
