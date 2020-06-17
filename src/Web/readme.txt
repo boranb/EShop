@@ -19,6 +19,8 @@ Update-Database -context AppIdentityDbContext
 Add-migration Initial -context ShopContext -OutputDir "Data/Migrations"
 Update-Database -context ShopContext
 
+Add-migration AddTableBasket -context ShopContext -OutputDir "Data/Migrations"
+
 
 UI layer types
 * Controllers
