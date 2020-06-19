@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
 using ApplicationCore.Specifications;
+using Ardalis.GuardClauses;
 
 namespace ApplicationCore.Services
 {
@@ -17,13 +18,22 @@ namespace ApplicationCore.Services
         {
             _basketRepository = basketRepository;
         }
-        public async Task<int> GetBasketItemCountAsync(string userName)
+        public async Task<int> GetBasketItemCountAsync(string buyerId)
         {
-            throw new NotImplementedException();
+            Guard.Against.NullOrEmpty(buyerId, nameof(buyerId));
+            var basket = await _basketRepository.FirstOrDefaultAsync(new BasketWithItemsSpecification(buyerId));
+
+            if (basket ==null)
+            {
+                return 0;
+            }
+
+            return basket.Items.Sum(x => x.Quantity);
         }
 
         public async Task TransferBasketAsync(string anonymousId, string userName)
         {
+            // todo: anonim sepetten kullanıcı sepetine aktar
             throw new NotImplementedException();
         }
 
@@ -45,14 +55,28 @@ namespace ApplicationCore.Services
             await _basketRepository.UpdateAsync(basket);
         }
 
-        public async Task SetQuantities(int basketId, Dictionary<string, int> quantities)
+
+        public async Task SetQuantities(int basketId, Dictionary<int, int> quantities)
         {
-            throw new NotImplementedException();
+            var basket = await _basketRepository.FirstOrDefaultAsync(new BasketWithItemsSpecification(basketId));
+            Guard.Against.Null(basket, nameof(basket));
+
+            foreach (var basketItem in basket.Items)
+            {
+                if (quantities.ContainsKey(basketItem.ProductId))
+                {
+                    basketItem.Quantity = quantities[basketItem.ProductId];
+                }
+            }
+
+            basket.Items.RemoveAll(x => x.Quantity == 0);
+            await _basketRepository.UpdateAsync(basket);
         }
 
         public async Task DeleteBasketAsync(int basketId)
         {
-            throw new NotImplementedException();
+            var basket = await _basketRepository.GetByIdAsync(basketId);
+            await _basketRepository.DeleteAsync(basket);
         }
     }
 }

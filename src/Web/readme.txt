@@ -36,6 +36,7 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 Install-Package Microsoft.AspNetCore.Identity
 Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore
 install-package Ardalis.Specification
+install-package Ardalis.Guardclauses
 
 
 ## SEED DATA ##
